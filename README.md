@@ -63,7 +63,7 @@ repositories {
 
 ```groovy
 dependencies {
-  implementation 'com.adikteev:crossdk-android:1.4.0'
+    implementation 'com.adikteev:crossdk-android:1.4.0'
 }
 ```
 
@@ -310,14 +310,20 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-To show an interstitial, use the `show()` method
+Make sure to leave enough time for the recommendation to fully load, the best way of doing this is
+to load the recommendation in advance before showing the interstitial, To show the interstitial use
+the `show()` method on the interstitial object
+
+```Kotlin
+interstitial.show()
+```
 
 ## Rewarded interstitial:
 
 You can set an interstitial to be rewarded using the
 method `setRewarded(isRewarded: Boolean, rewardedCallback: CrossDKRewardedCallback?)` by setting the
-parameter `isRewarded` to `true`. Additionally you can get notified when user should be rewarded using
-the interface `CrossDKRewardedCallback`
+parameter `isRewarded` to `true`. Additionally you can get notified when user should be rewarded
+using the interface `CrossDKRewardedCallback`
 
 ## CrossDK Listener:
 
@@ -426,7 +432,8 @@ public class MainActivity extends AppCompatActivity {
 
 You can dismiss the promotion by calling the method `.dismissView(isAnimated: Boolean)`, if the
 promotion is not properly dismissed you can call the method `.destroy()` available in all the
-CrossDKView's in your `.onDestroy()` or `.onDetach()` lifecycle methods
+CrossDKView's in your `.onDestroy()` or `.onDetach()` lifecycle methods in order to to clean the
+view
 
 ## Proguard:
 

@@ -1,4 +1,4 @@
-# CrossDK 1.4.0
+# CrossDK 1.5.0
 
 ![Android](https://img.shields.io/badge/Android-android-white)
 [![Kotlin](https://img.shields.io/badge/Kotlin-compatible-brightgreen)](#kotlin-support)
@@ -63,7 +63,7 @@ repositories {
 
 ```groovy
 dependencies {
-    implementation 'com.adikteev:crossdk-android:1.4.0'
+    implementation 'com.adikteev:crossdk-android:1.5.0'
 }
 ```
 

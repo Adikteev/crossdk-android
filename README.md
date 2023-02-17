@@ -1,4 +1,4 @@
-# CrossDK 1.5.0
+# CrossDK 2.0.0
 
 ![Android](https://img.shields.io/badge/Android-android-white)
 [![Kotlin](https://img.shields.io/badge/Kotlin-compatible-brightgreen)](#kotlin-support)
@@ -63,7 +63,7 @@ repositories {
 
 ```groovy
 dependencies {
-    implementation 'com.adikteev:crossdk-android:1.5.0'
+    implementation 'com.adikteev:crossdk-android:2.0.0'
 }
 ```
 
@@ -174,19 +174,53 @@ adding the view to the view hierarchy The Cross promotion SDK offers three types
 - `CrossDKMidSizeView` : Mid size Cross promotion format
 - `CrossDKInterstitialView` : Interstitial Cross promotion format with or without rewarded
 
+### available methods:
+
+- ```load(crossDKLoadCallback: CrossDKLoadCallback?)``` : calling this method will start pre-loading
+  ad content
+- ```show()``` : calling this method will show ad when added to screen
+- ```setPosition(position: CrossDKPosition)``` : available on banner and mid size, set the position
+  of the recommendation on screen, the available value of ```CrossDKPosition``` are BOTTOM and
+  BOTTOM_RAISED
+- ```setCloseButtonVisibility(visibility: Int)``` : set the visibility of the close button
+- ```setCrossDKContentCallback(crossDKContentCallback: CrossDKContentCallback)``` set the callback
+  for events on the corresponding view
+- ```setRewarded(isRewarded: Boolean, rewardedCallback: CrossDKRewardedCallback?)``` : available on
+  interstitial , calling this method will set the interstitial as rewarded
+
 ### using layout xml file:
 
 ```xml
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" tools:context=".MainActivity">
 
-    <com.adikteev.crossdk.views.CrossDKView android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-        app:show_close_button="true" />
+    <com.adikteev.crossdk.views.CrossDKView android:id="@+id/crossdk_view"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" app:show_close_button="true" />
 </RelativeLayout>
+```
+
+After adding the view to the xml you have to show the view in the fragment
+or activity:
+
+```Kotlin
+import android.view.View
+import android.widget.RelativeLayout
+import com.adikteev.crossdk.views.CrossDKView
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val view = findViewById<CrossDKView>(R.id.crossdk_view)
+        // Showing recommendation
+        view.show()
+    }
+}
 ```
 
 ### using kotlin:
@@ -213,6 +247,8 @@ class MainActivity : AppCompatActivity() {
         view.setCloseButtonVisibility(View.VISIBLE)
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, view.id)
         container.addView(view, params)
+        // Showing recommendation
+        view.show()
     }
 }
 ```
@@ -239,15 +275,22 @@ public class MainActivity extends AppCompatActivity {
         view.setCloseButtonVisibility(View.VISIBLE);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, view.getId());
         container.addView(view);
-
+        // Showing recommendation
+        view.show();
     }
 }
 ```
 
-## Preload interstitial recommendations:
+## Preload recommendations:
 
-For the interstitial recommendation you should preload recommendation before displaying it on
-screen, use the interface `CrossDKLoadCallback` to get notified when load finishes:
+You can preload recommendation before displaying it on screen, this is particularly useful when
+having large assets(video) which takes time to display.
+Preload should be launched before showing ads on screen in order to leave enough time to
+video to be prepared.
+Use the interface `CrossDKLoadCallback` to get notified when load finishes.
+
+A recommendation is available '30min' after its preload, when this delay passed the view becomes
+expired and can no longer be showed on screen.
 
 - Kotlin
 
@@ -261,16 +304,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val interstitial = CrossDKInterstitialView(this)
-        // Add view to view hierarchy
+        // Add view to hierarchy
 
         //Preload recommendation
         interstitial.load(object : CrossDKLoadCallback {
             override fun onRecommendationLoaded() {
                 // you can show recommendation
+                interstitial.show()
             }
 
             override fun onRecommendationLoadFailure() {
                 // handle load failure
+            }
+
+            override fun onRecommendationExpired() {
+                // handle load expired
             }
         })
     }
@@ -304,15 +352,19 @@ public class MainActivity extends AppCompatActivity {
             public void onRecommendationLoadFailure() {
                 // handle load failure
             }
-        });
 
+            @Override
+            public void onRecommendationExpired() {
+                // handle load expired
+            }
+        });
     }
 }
 ```
 
 Make sure to leave enough time for the recommendation to fully load, the best way of doing this is
-to load the recommendation in advance before showing the interstitial, To show the interstitial use
-the `show()` method on the interstitial object
+to load the recommendation in advance before showing in on screen, To show the view use
+the `show()` method on the mid size and interstitial object
 
 ```Kotlin
 interstitial.show()

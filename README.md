@@ -1,4 +1,4 @@
-# CrossDK 2.0.0
+# CrossDK 2.1.0
 
 ![Android](https://img.shields.io/badge/Android-android-white)
 [![Kotlin](https://img.shields.io/badge/Kotlin-compatible-brightgreen)](#kotlin-support)
@@ -63,7 +63,7 @@ repositories {
 
 ```groovy
 dependencies {
-    implementation 'com.adikteev:crossdk-android:2.0.0'
+    implementation 'com.adikteev:crossdk-android:2.1.0'
 }
 ```
 
@@ -486,6 +486,41 @@ You can dismiss the promotion by calling the method `.dismissView(isAnimated: Bo
 promotion is not properly dismissed you can call the method `.destroy()` available in all the
 CrossDKView's in your `.onDestroy()` or `.onDetach()` lifecycle methods in order to to clean the
 view
+
+## CrossDK Debug mode:
+
+You can enable debug mode on SDK in order to have logs in console, this can be done by setting the
+logLevel in `CrossDKConfig` class:
+
+```kotlin
+import com.adikteev.crossdk.CrossDKConfig
+
+CrossDKConfig.Setting.logLevel = CrossDKConfig.LOG.VERBOSE
+```
+
+- `LOG.VERBOSE`: for verbose logging
+- `LOG.ERROR`: for error logging
+- `LOG.NONE`: for disabling logger
+
+> We recommend setting up this config before initializing the SDK.
+
+## Soft keyboard management:
+
+The CrossDK content hides soft keyboard when displayed for the first time.
+Please note that this behavior may not work on all keyboard configurations. It's always preferable
+to handle the dismiss and display of the keyboard in application level.
+
+## Hardware acceleration:
+
+CrossDK needs hardware acceleration enabled in order to properly show animated content, so make sure
+you have this activated in your AndroidManifest.xml:
+
+```Xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <activity android:hardwareAccelerated="true" />
+</manifest>
+```
 
 ## Proguard:
 

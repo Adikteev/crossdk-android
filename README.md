@@ -1,4 +1,4 @@
-# CrossDK 2.1.0
+# CrossDK 2.1.1
 
 ![Android](https://img.shields.io/badge/Android-android-white)
 [![Kotlin](https://img.shields.io/badge/Kotlin-compatible-brightgreen)](#kotlin-support)
@@ -63,7 +63,7 @@ repositories {
 
 ```groovy
 dependencies {
-    implementation 'com.adikteev:crossdk-android:2.1.0'
+  implementation 'com.adikteev:crossdk-android:2.1.1'
 }
 ```
 
@@ -231,25 +231,25 @@ import android.widget.RelativeLayout
 import com.adikteev.crossdk.views.CrossDKView
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
 
-        val container =
-            findViewById<RelativeLayout>(R.id.container_id) // container_id: the id of your parent layout
-        val view = CrossDKView(this)
-        val params =
-            RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-            )
-        view.id = View.generateViewId()
-        view.setCloseButtonVisibility(View.VISIBLE)
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, view.id)
-        container.addView(view, params)
-        // Showing recommendation
-        view.show()
-    }
+    val container =
+      findViewById<RelativeLayout>(R.id.container_id) // container_id: the id of your parent layout
+    val view = CrossDKView(this)
+    val params =
+      RelativeLayout.LayoutParams(
+        RelativeLayout.LayoutParams.MATCH_PARENT,
+        RelativeLayout.LayoutParams.WRAP_CONTENT
+      )
+    view.id = View.generateViewId()
+    view.setCloseButtonVisibility(View.VISIBLE)
+    params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, view.id)
+    container.addView(view, params)
+    // Showing recommendation
+    view.show()
+  }
 }
 ```
 
@@ -261,23 +261,23 @@ import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-        RelativeLayout container = findViewById(R.id.container_view); // container_id: the id of your parent layout
-        CrossDKView view = new CrossDKView(this);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT);
-        view.setId(View.generateViewId());
-        view.setCloseButtonVisibility(View.VISIBLE);
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, view.getId());
-        container.addView(view);
-        // Showing recommendation
-        view.show();
-    }
+    RelativeLayout container = findViewById(R.id.container_view); // container_id: the id of your parent layout
+    CrossDKView view = new CrossDKView(this);
+    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.MATCH_PARENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT);
+    view.setId(View.generateViewId());
+    view.setCloseButtonVisibility(View.VISIBLE);
+    params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, view.getId());
+    container.addView(view);
+    // Showing recommendation
+    view.show();
+  }
 }
 ```
 
@@ -518,7 +518,7 @@ you have this activated in your AndroidManifest.xml:
 ```Xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <activity android:hardwareAccelerated="true" />
+  <activity android:hardwareAccelerated="true" />
 </manifest>
 ```
 

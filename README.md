@@ -1,4 +1,4 @@
-# CrossDK 2.1.1
+# CrossDK 2.2.0
 
 ![Android](https://img.shields.io/badge/Android-android-white)
 [![Kotlin](https://img.shields.io/badge/Kotlin-compatible-brightgreen)](#kotlin-support)
@@ -25,6 +25,18 @@ handle cases where the api is lower than 21
 (see [CrossDK Listener](#crossdk-listener))
 
 ## Installation:
+
+### Maven with Gradle:
+
+- Inside dependencies of the build.gradle of app module, add the following dependency:
+
+```groovy
+dependencies {
+  implementation 'com.adikteev:crossdk-android:2.2.0'
+}
+```
+
+Gradle will directly add the package to your dependencies.
 
 ### GitHub Package Registry with Gradle:
 
@@ -63,7 +75,7 @@ repositories {
 
 ```groovy
 dependencies {
-  implementation 'com.adikteev:crossdk-android:2.1.1'
+  implementation 'com.adikteev:crossdk-android:2.2.0'
 }
 ```
 

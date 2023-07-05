@@ -1,4 +1,4 @@
-# CrossDK 2.2.0
+# CrossDK 2.3.0
 
 ![Android](https://img.shields.io/badge/Android-android-white)
 [![Kotlin](https://img.shields.io/badge/Kotlin-compatible-brightgreen)](#kotlin-support)
@@ -32,7 +32,7 @@ handle cases where the api is lower than 21
 
 ```groovy
 dependencies {
-  implementation 'com.adikteev:crossdk-android:2.2.0'
+  implementation 'com.adikteev:crossdk-android:2.3.0'
 }
 ```
 
@@ -75,7 +75,7 @@ repositories {
 
 ```groovy
 dependencies {
-  implementation 'com.adikteev:crossdk-android:2.2.0'
+  implementation 'com.adikteev:crossdk-android:2.3.0'
 }
 ```
 

@@ -1,3 +1,5 @@
+> :warning: Due to the end of the Cross Promotion Platform, this repository is now deprecated.
+
 # CrossDK 2.3.0
 
 ![Android](https://img.shields.io/badge/Android-android-white)
